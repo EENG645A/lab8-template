@@ -62,7 +62,7 @@ def evaluate(checkpoint: str | os.PathLike, replay_folder: str | os.PathLike, ev
     """Runs a model evaluation from checkpoint for a duration with num workers and saves replays to folder"""
 
     # register_env("flappybird", lambda env_config: CustomFlappyBirdEnv(env_config))
-    # register_env("flappybird", CustomFlappyBirdEnv)
+    register_env("flappybird", CustomFlappyBirdEnv)
 
     # Get the old config from the checkpoint
     old_alg = Algorithm.from_checkpoint(checkpoint=checkpoint)

@@ -16,10 +16,7 @@ def test_submission_dir():
         if i == 1: 
             assert any(re.match(r"checkpoint_*", item) for item in dirs), 'Did not find checkpoint folder'
             assert 'SUBMISSION.md'in files, "SUBMISSION.md got moved?"
-            # assert any(re.match(r".gif", x) for x in files)
-            # print('TEST')
-            # print(x for x in files)
-            # assert any(re.match(r".gif", item) for item in files)
+            assert any(re.search(r".mp4", item) for item in files), "Please submit a .mp4"
         if i == 2: 
             assert 'policies' in dirs, "policies folder not in right spot"
             assert files == ['rllib_checkpoint.json', 'algorithm_state.pkl']
@@ -27,3 +24,5 @@ def test_submission_dir():
             assert 'default_policy' in dirs
         if i == 4:
             assert files == ['rllib_checkpoint.json', 'policy_state.pkl']
+
+# test_submission_dir()

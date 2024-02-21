@@ -1,7 +1,8 @@
 """
 Script to demo two episodes of the parent gym env
 FYI this file cannot see modules in ../ for importing when run as a 'script' (press play button in vscode).
-Pylint will say you can import them, but you would have to run this as a 'module'
+Pylint will say you can import them, but you would have to run this as a 'module', if you were to try importing 
+above here.
 
 I.e. if you add:
 import custom_flappy_bird
