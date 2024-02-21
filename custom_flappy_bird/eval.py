@@ -30,7 +30,7 @@ tf1.enable_eager_execution()
 # FIXME: use the actual checkpoint, up to the folder depth as in this example
 # This can be copy/paste from the terminal if "best checkpoint" is printed,
 # Or in vscode you may right click on a folder and choose "copy path" to get the absolute path
-checkpoint = '/workspaces/eeng645-rllab/ray_results/Lab8FlappyBirdPPOrestore/PPO_flappybird_31f47_00000_0_2024-02-21_02-52-04/checkpoint_000000'
+checkpoint = '/root/lab8-template/ray_results/Lab8FlappyBirdFIXME/PPO_flappybird_5fd0b_00000_0_2024-02-21_21-15-44/checkpoint_000000'
 replay_folder = pathlib.Path(__file__).parent.parent.resolve().joinpath('replays')
 evaluation_duration = 20
 evaluation_num_workers = 5
