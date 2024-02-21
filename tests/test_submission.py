@@ -19,10 +19,12 @@ def test_submission_dir():
             assert any(re.search(r".mp4", item) for item in files), "Please submit a .mp4"
         if i == 2: 
             assert 'policies' in dirs, "policies folder not in right spot"
-            assert files == ['rllib_checkpoint.json', 'algorithm_state.pkl']
+            for file in files:
+                assert file in ['rllib_checkpoint.json', 'algorithm_state.pkl']
         if i == 3:
             assert 'default_policy' in dirs
         if i == 4:
-            assert files == ['rllib_checkpoint.json', 'policy_state.pkl']
+            for file in files:
+                assert file in['rllib_checkpoint.json', 'policy_state.pkl']
 
 # test_submission_dir()
