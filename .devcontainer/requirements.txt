@@ -26,5 +26,5 @@ sbx-rl
 tinyscaler
 supersuit
 autorom
-flappy-bird-gymnasium
+flappy-bird-gymnasium==0.3.0
 git+https://github.com/Farama-Foundation/stable-retro.git@fbneo
