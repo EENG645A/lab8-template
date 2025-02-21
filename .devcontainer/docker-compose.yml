@@ -1,0 +1,35 @@
+# version: '3'
+services:
+  dev:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+      # args:
+      #   - DEV_PW=${DEV_PW}
+    image: tfgpu-image
+    # ipc: host
+    stdin_open: true
+    tty: true
+    # env_file: .env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # user: developer
+    shm_size: '2gb'
+    # healthcheck:
+    #   test: ["CMD", "ls", "/dev/nvidia0"]
+    #   interval: 300s
+    #   timeout: 10s
+    #   retries: 3
+    volumes:
+      - ..:/workspace
+      - keras_cache:/home/developer/.keras
+      - tf_datasets:/home/developer/tensorflow_datasets
+
+volumes:
+  keras_cache:
+  tf_datasets:

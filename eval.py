@@ -1,5 +1,6 @@
 """
-This is a Command Line Interface (CLI) to call custom_flappy_bird.eval.evaluate with passed args.
+This is a Command Line Interface (CLI) to call
+custom_flappy_bird.eval.evaluate with passed args.
 
 For more info, in terminal from the workspace dir, type:
     python eval.py -h
@@ -16,19 +17,20 @@ sys.path.append(ROOT_DIR)
 os.chdir(ROOT_DIR)
 # print('sys.path', sys.path)
 
+
 def _get_args():
     """Parses the command line arguments and returns them."""
 
     parser = argparse.ArgumentParser(description=__doc__)
-    
+
     # Argument for the mode of execution (human or random):
     parser.add_argument(
-        "checkpoint", 
-        type=str, 
-        # default="", 
+        "checkpoint",
+        type=str,
+        # default="",
         help="Checkpoint to load Algorithm from for evaluation"
     )
-    
+
     parser.add_argument(
         "--replay_dir",
         "-r",
@@ -46,14 +48,15 @@ def _get_args():
     )
 
     parser.add_argument(
-        "--workers", 
-        "-w", 
-        type=int, 
-        default=5, 
+        "--workers",
+        "-w",
+        type=int,
+        default=5,
         help="Number of evaluation workers. Must be <= NUM_CPUs"
         )
-    
+
     return parser.parse_args()
+
 
 def main():
     args = _get_args()
@@ -65,6 +68,7 @@ def main():
         evaluation_duration=args.episodes,
         evaluation_num_workers=args.workers
     )
+
 
 if __name__ == "__main__":
     main()

@@ -1,19 +1,30 @@
-# FROM tensorflow/tensorflow:2.13.0-gpu-jupyter
-# warning: 2.15 uses python 3.11 which is experimental in Ray
-FROM tensorflow/tensorflow:2.15.0-gpu-jupyter
+FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV SHELL=/bin/bash
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
 
-RUN apt-get update --fix-missing \
-    && apt-get --no-install-recommends install -y \
+LABEL maintainer="Developer"
+LABEL description="TensorFlow GPU Development Container"
+LABEL version="1.0"
+
+RUN rm -f /etc/apt/apt.conf.d/docker-clean
+
+RUN	apt update --fix-missing && apt-get --no-install-recommends install -y wget gpg apt-transport-https 
+
+RUN	apt update --fix-missing && apt-get --no-install-recommends install -y \
         git \
         gdb \
         curl \
         ca-certificates \
         build-essential \
         host \
-        vim \
+        vim-gtk3 \
+        sudo \
         man \
+        tmux \
         net-tools \
         cmake \
         openssh-server \
@@ -26,30 +37,29 @@ RUN apt-get update --fix-missing \
         ffmpeg \
         libsm6 \
         libxext6 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/*
 
-# Use Tini to init container
-ENV TINI_VERSION v0.19.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
-ENTRYPOINT ["/tini", "-g", "--"]
-
-RUN curl -fsSL https://code-server.dev/install.sh | sh
-
-# install VS Code extensions
-RUN code-server --install-extension ms-python.python \
-                --install-extension vscode-icons-team.vscode-icons \
-                --install-extension ms-toolsai.jupyter \
-                --install-extension gruntfuggly.todo-tree
-
-CMD ["code-server", "--auth", "none", "--port", "8888", "--host", "0.0.0.0"]
-
+ENV PYTHONPATH="${PYTHONPATH}:/root/.local/bin"
 WORKDIR /
+COPY ./requirements.txt /
+RUN	python -m pip install --upgrade pip && \
+        pip install --requirement /requirements.txt
 
-COPY requirements.txt /
-RUN python -m pip install --upgrade pip
-RUN pip3 install --no-cache-dir -r requirements.txt
-WORKDIR /opt/project
+#de-escalate
+# RUN groupadd -g 1000 developer && \
+#     useradd -m --uid 1000 --gid 1000 developer
+# ARG DEV_PW
+# RUN echo "developer:${DEV_PW}" | chpasswd
+# RUN adduser developer sudo
+# RUN mkdir -p /home/developer/.keras /home/developer/tensorflow_datasets /opt/project && \
+#     chown -R 1000:1000 /home/developer /opt/project
+# RUN mkdir -p /home/developer/.keras /home/developer/tensorflow_datasets /opt/project /workspace && \
+#     chown -R developer:developer /home/developer /opt/project /workspace && \
+#     chmod -R 755 /home/developer /opt/project /workspace
+    
+# USER developer
+RUN mkdir -p /opt/project /workspace
+WORKDIR /workspace
 
-EXPOSE 6006
+# Default CMD
+CMD ["/bin/bash"]
