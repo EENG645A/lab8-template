@@ -1,5 +1,5 @@
 {
-    "name": "TensorFlow GPU Development",
+    "name": "TensorFlow GPU Development with RL",
     "dockerComposeFile": "docker-compose.yml",
     "service": "dev",
     "workspaceFolder": "/workspace",

@@ -5,11 +5,11 @@
 ### 1. Describe what happens to the mean of the custom metric `flap_ratio` over the course of training.
 Flap ratio starts out like ____ and then it does ____ and is sort of shaped like ____. I think that happens because _____.
 
-You could put a picture of it here if you feel like it... not required.
+Put a picture here out of tensorboard of your flapratio.
 
 The markdown command to load a picture is 
 ```
-![image info](./path/to/image.png)
+![image info](../../imgs/flap_ratio.png)
 ```
 
 ## The Gymnasium

@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.8.0-runtime-ubuntu22.04 AS base
+FROM tensorflow/tensorflow:2.18.0-gpu-jupyter AS base
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
@@ -41,9 +41,9 @@ RUN	apt update --fix-missing && apt-get --no-install-recommends install -y \
 
 ENV PYTHONPATH="${PYTHONPATH}:/root/.local/bin"
 WORKDIR /
-COPY ./requirements.txt /
+COPY    requirements.txt /tmp/requirements.txt
 RUN	python -m pip install --upgrade pip && \
-        pip install --requirement /requirements.txt
+        pip install --requirement /tmp/requirements.txt
 
 #de-escalate
 # RUN groupadd -g 1000 developer && \

@@ -19,7 +19,7 @@ services:
               count: 1
               capabilities: [gpu]
     # user: developer
-    shm_size: '2gb'
+    shm_size: '8gb'
     # healthcheck:
     #   test: ["CMD", "ls", "/dev/nvidia0"]
     #   interval: 300s
@@ -27,9 +27,9 @@ services:
     #   retries: 3
     volumes:
       - ..:/workspace
-      - keras_cache:/home/developer/.keras
-      - tf_datasets:/home/developer/tensorflow_datasets
+      # - keras_cache:/home/developer/.keras
+      # - tf_datasets:/home/developer/tensorflow_datasets
 
-volumes:
-  keras_cache:
-  tf_datasets:
+# volumes:
+#   keras_cache:
+#   tf_datasets:
