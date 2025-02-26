@@ -43,7 +43,7 @@ In order to change the gym environment, we will make a child class of it to inhe
 
 Another powerful way to interact with the training loop is to create callbacks. Most libraries allow for callbacks and have slightly different formats for them. I have already written some of the callbacks, including the complex one that records movies for when you evaluate your policy. You have to 
 
-3.   Finish writing `FlapActionMetricCallback`. The purpose of this callback is to read the action that the agent took each step of the episode and store it. At the end of the episode, store the ratio of 'flaps' as a custom metric. This should be like a "percentage of steps flapped" or more precisely `steps_flapped/total_steps` $\frac{Flap_{steps}}{Total_{steps}}$ in the episode.
+3.   Finish writing `FlapActionMetricCallback`. The purpose of this callback is to read the action that the agent took at each step, and store the ratio of steps that the action was flapped as a mean. This should be like a "percentage of steps flapped" or more precisely `steps_flapped/total_steps` $\frac{Flap_{steps}}{Total_{steps}}$ in the episode.
 
 4. Write `CustomScoreCallback`. The purpose of this callback is to store the score at the end of the episode as a custom metric. The score is already calculated by the environment and stored in the episode `info` for you as part of the parent gym.
 
